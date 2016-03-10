@@ -17,8 +17,10 @@ public class GuessNumber{
       
 
 	}
+
 	public void quiz(){
-	    System.out.println("Think of a number between " + lower + " and "  + upper );
+	    System.out.println("Think of a number between " +
+			       lower + " and "  + upper );
 	    int temp;
 	    Scanner sc = new Scanner(System.in);
 	    int l = lower;
@@ -26,19 +28,17 @@ public class GuessNumber{
 	    while(l!=u){
     		temp = l + (u-l)/2;
     		boolean gt = false;
-    		try{
-		    gt = askIfGreaterThan(temp);
 
-    		}
-    		catch(InvalidInputException e){
+    		try {
+		    gt = askIfGreaterThan(temp);
+    		} catch(InvalidInputException e) {
 		    System.out.println("please answer y or n");
 		    continue;
-
     		}
-    		if(gt){
+		
+    		if(gt) {
 		    l = temp+1;
-    		}
-    		else{
+    		} else {
 		    u = temp;
     		}
 
@@ -46,9 +46,11 @@ public class GuessNumber{
 
 	    System.out.println("Your number is " + u);
 	}
+	
 	private boolean askIfGreaterThan (int n) throws InvalidInputException{
 	    boolean output;
 	    Scanner sc  = new Scanner(System.in);
+
 	    System.out.println("is it greater than " + n +" ? ");
 	    String input = sc.next();
 	    
@@ -65,15 +67,17 @@ public class GuessNumber{
 	    default:
     		throw new InvalidInputException(); 
 	    }
+
 	    return output;
 	}
    
     }
+    
     public static void main(String[] args){
-	//	Guesser g=new Guesser();
 	int lower= 0;
 	int upper = 16;
 	Guesser g = new Guesser(lower,upper);
+	
 	g.quiz();
 
 
