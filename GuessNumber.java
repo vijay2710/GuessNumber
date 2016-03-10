@@ -5,76 +5,81 @@ import java.util.Scanner;
 
 public class GuessNumber{
     private static class Guesser{       
-    private int lower;
-    private int upper;
-    class InvalidInputException extends Exception{
-    	public InvalidInputException() {}
+	private int lower;
+	private int upper;
+	class InvalidInputException extends Exception{
+	    public InvalidInputException() {}
 
-    }
-    public Guesser(int l,int u) {
-    	lower = l;
-    	upper = u;
+	}
+	public Guesser(int l,int u) {
+	    lower = l;
+	    upper = u;
       
 
-    }
-    public void quiz(){
-    	System.out.println("Think of a number between " + lower + " and "  + upper );
-    	int temp;
-    	Scanner sc = new Scanner(System.in);
-    		int l = lower;
-    		int u = upper;
-    		while(l!=u){
+	}
+
+	public void quiz(){
+	    System.out.println("Think of a number between " +
+			       lower + " and "  + upper );
+	    int temp;
+	    Scanner sc = new Scanner(System.in);
+	    int l = lower;
+	    int u = upper;
+	    while(l!=u){
     		temp = l + (u-l)/2;
     		boolean gt = false;
-    		try{
-    			gt = askIfGreaterThan(temp);
 
+    		try {
+		    gt = askIfGreaterThan(temp);
+    		} catch(InvalidInputException e) {
+		    System.out.println("please answer y or n");
+		    continue;
     		}
-    		catch(InvalidInputException e){
-    			System.out.println("please answer y or n");
-    			continue;
-
-    		}
-    		if(gt){
-            l = temp+1;
-    		}
-    		else{
-            u = temp;
+		
+    		if(gt) {
+		    l = temp+1;
+    		} else {
+		    u = temp;
     		}
 
-    	}
-    System.out.println("Your number is " + u);
-    }
-    private boolean askIfGreaterThan (int n) throws InvalidInputException{
-    	boolean output;
-    	Scanner sc  = new Scanner(System.in);
-    	System.out.println("is it greater than " + n +" ? ");
-    	String input = sc.next();
+	    }
 
-    	switch (input.toLowerCase()){
+	    System.out.println("Your number is " + u);
+	}
+	
+	private boolean askIfGreaterThan (int n) throws InvalidInputException{
+	    boolean output;
+	    Scanner sc  = new Scanner(System.in);
 
-    		case ("y"): 
+	    System.out.println("is it greater than " + n +" ? ");
+	    String input = sc.next();
+	    
+	    switch (input.toLowerCase()){
+		
+	    case ("y"): 
     		output = true;
     		break;
 
-    		case "n":
+	    case "n":
     		output = false;
     		break;
 
-    		default:
+	    default:
     		throw new InvalidInputException(); 
-    	}
-              return output;
-    }
+	    }
+
+	    return output;
+	}
    
     }
-	public static void main(String[] args){
-	//	Guesser g=new Guesser();
-		int lower= 0;
-		int upper = 16;
-		Guesser g = new Guesser(lower,upper);
-		g.quiz();
+    
+    public static void main(String[] args){
+	int lower= 0;
+	int upper = 16;
+	Guesser g = new Guesser(lower,upper);
+	
+	g.quiz();
 
 
-	}
+    }
 }
